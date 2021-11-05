@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -16,26 +16,30 @@ public class Seller {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private long  id;
 	private String name;
 	
-	@OneToOne(mappedBy = "seller")
+	@OneToMany(mappedBy = "seller")
 	private List<Sale> sales = new ArrayList<>();
 	
-	public Seller() {
-		
+	public List<Sale> getSales() {
+		return sales;
 	}
 
-	public Seller(Long id, String name) {
+	public Seller() {
+		}
+
+	public Seller(long id, String name) {
+		super();
 		this.id = id;
 		this.name = name;
 	}
 
-	public Long getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -46,10 +50,7 @@ public class Seller {
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	public List<Sale> getSales() {
-		return sales;
-	}
-
 	
+	
+
 }
